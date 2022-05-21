@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+    <!--Latest compiled and minified CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+	<link rel="stylesheet" href="/Semi/views/admin-css/admin_b_2_1.css">
+<style>
+    #content_2_2{
+        background-color: rgb(224, 243, 246);
+            color: rgb(63, 59, 59);
+            width: 95%;
+            height: 60%;
+            margin: auto;
+            margin-top: 50px;
+    }
+    table{
+        width: 70%;
+        text-align: center;
+    }
+</style>   
+</head>
+<body>
+	<%@include file="/views/common/adminMenubar.jsp" %>
+    <div id="content_2">
+        <!--왼쪽 여백--><div id="content_2_empty"></div>
+        <div id="content_2_1">
+            <h2 align="center">공지사항 상세보기</h2>
+        </div>
+        <!--게시글 테이블 작업 시작-->
+        <div id="content_2_2">
+            <br>
+            <table align="center" border="1">
+                <tr>
+                    <th width="70px">제목</th>
+                    <td width="350px" colspan="3">공지사항 제목</td>                    
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td>관리자</td>
+                    <th>작성일</th>
+                    <td>2022-05-14</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td colspan="3">
+                        <p style="height: 200px;">안녕하세요 관리자입니다.</p>
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+        </div>
+        <div id="content_2_3" align="center">
+            <a href="" class="btn btn-success">목록으로 가기</a>
+            <a href="" class="btn btn-warning">수정하기</a>
+            <a href="" class="btn btn-danger">삭제하기</a>
+        </div>
+        <!--게시글 테이블 작업 끝-->
+        <!--글 목록 시작-->
+        <div id="content_2_4">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+        </div>
+        <!--글 목록 끝-->
+    </div>
+</body>
+</html>
