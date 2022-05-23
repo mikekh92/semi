@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.notice.model.vo.Notice"%>
+
+<%
+	Notice notice = (Notice)request.getAttribute("notice");
+
+
+%>    
+
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,11 +35,11 @@
                     margin: auto;
                     margin-top: 50px;
         }
-        #enrollForm input,#enrollForm textarea{
+        #updateForm input,#updateForm textarea{
             width: 100%;
             box-sizing: border-box;
         }
-        #enrollForm table{
+        #updateForm table{
             border: 1px soild white;
         }
     </style>          
@@ -43,11 +51,12 @@
         <!--게시글 테이블 작업 시작-->
         <div id="content_2_1">
             <br> <h2 align="center">공지사항 수정하기</h2>
-                <form id="enrollForm" action="" method="post">
+                <form id="updateForm" action="<%=contextPath%>/update.no" method="post">
+                	<input type="hidden" name="nno" value="<%=notice.getNoticeNo()%>">
                     <table align="center">
                         <tr>
                             <th width="50px">제목</th>
-                            <td width="400px"><input type="text" name="title" required></td>
+                            <td width="400px"><input type="text" name="title" value="<%=notice.getNoticeTitle() %>" required></td>
                         </tr>
                         <tr>
                             <th>내용</th>
@@ -55,7 +64,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <textarea name="content" id="" cols="30" rows="10" style="resize: none;" required ></textarea>
+                                <textarea name="content" id="" cols="30" rows="10" style="resize: none;" required ><%=notice.getNoticeContent() %></textarea>
                             </td>
                         </tr>
                     </table>

@@ -1,7 +1,6 @@
 package com.kh.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.common.PageInfo;
 import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeListController
+ * Servlet implementation class NoticeDetailController
  */
-@WebServlet("/list.no")
-public class NoticeListController extends HttpServlet {
+@WebServlet("/detail.no")
+public class NoticeDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListController() {
+    public NoticeDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,33 +31,18 @@ public class NoticeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int listCount;
-		int currentPage;
-		int pageLimit;
-		int boardLimit;
-		
-		int maxPage;
-		int startPage;
-		int endPage;
-		
-		listCount = new NoticeService().selectListCount();
-		currentPage=Integer.parseInt(request.getParameter("cpage"));
-		pageLimit =10;
-		boardLimit=10;
-		maxPage=(int)(Math.ceil((double)listCount/boardLimit));
-		startPage=(currentPage-1)/pageLimit*pageLimit+1;
-		endPage=startPage+pageLimit-1;
-		
-		if(endPage>maxPage) {
-			endPage=maxPage;
-		}
-		PageInfo pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
-		
-		ArrayList <Notice> list =new NoticeService().selectNoticeList();
-		
-		request.setAttribute("list", list);
-		System.out.println(list);
-		request.getRequestDispatcher("views/admin/notice/noticeListView.jsp").forward(request, response);
+	int noticeNo=Integer.parseInt(request.getParameter("nno"));
+	
+	int result = new NoticeService().increaseCount(noticeNo);
+	
+	if(result>0) {
+		Notice n =new NoticeService().selectNotice(noticeNo);
+		request.setAttribute("notice", n);
+		request.getRequestDispatcher("views/admin/notice/noticeDetailView.jsp").forward(request, response);
+	}else {
+		request.setAttribute("errorMsg", "공지사항 조회 실패");
+		request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
+	}
 	}
 
 	/**

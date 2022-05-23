@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,com.kh.notice.model.vo.Notice"%>
+<%
+	ArrayList <Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,15 +72,28 @@
                 검색 회원 수 <span style="color:red">30</span>명
             </div>
             <div id="content_2_4">
+            
+<%--             <%if(loginUser!= null && loginUser.getUserId().equals("admin")){ %> --%> 
+            		//나중에 필요
                 <button type="button" class="btn btn-warning" onclick="location.href='<%=contextPath %>/enrollForm.no'";>작성하기</button>
                 <button type="button" class="btn btn-warning">삭제</button>
                 <button type="button" class="btn btn-warning">수정</button>
             </div>
+            
+<%--             <%} %> --%>
+            
             <!--회원 명 수 및 버튼 끝-->
     
             <!--게시글 테이블 작업 시작-->
             <div id="content_2_5">
                 <br>
+                <div class="selecdiv col-sm-2">
+                        <select id="select" class="form-control">
+                            <option value="">5개</option>
+                            <option value="">10개</option>
+                            <option value="">20개</option>
+                        </select>
+                </div>
                 <table align="center" class="table-hover" >
                     <thead>
                         <th width="4%">
@@ -97,38 +114,15 @@
                     <%for(Notice n : list) {%>
                         <tr>
                             <td><input type="checkbox" name="" id=""></td>
-                            <td>1</td>
-                            <td>바보?</td>
-                            <td>바보</td>
-                            <td>1</td>
-                            <td>20220514</td>
+                            <td><%=n.getNoticeNo() %></td>
+                            <td><%=n.getNoticeTitle() %></td>
+                            <td><%=n.getNoticeWriter() %></td>
+                            <td><%=n.getNoticeViewNo() %></td>
+                            <td><%=n.getNoticeDate() %></td>
                         </tr>
-                    <%} %>    
-                        <tr>
-                            <td><input type="checkbox" name="" id=""></td>
-                            <td>1</td>
-                            <td>바보?</td>
-                            <td>바보</td>
-                            <td>1</td>
-                            <td>20220514</td>
-                        </tr><tr>
-                            <td><input type="checkbox" name="" id=""></td>
-                            <td>1</td>
-                            <td>바보?</td>
-                            <td>바보</td>
-                            <td>1</td>
-                            <td>20220514</td>
-                        </tr><tr>
-                            <td><input type="checkbox" name="" id=""></td>
-                            <td>1</td>
-                            <td>바보?</td>
-                            <td>바보</td>
-                            <td>1</td>
-                            <td>20220514</td>
-                        </tr>
-                        
-                        
-                    </tbody>
+                   	 <%} %>
+                    <%} %> 
+                   </tbody>
                 </table>    
             </div>
             <!--게시글 테이블 작업 끝-->
@@ -141,9 +135,18 @@
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                  </ul>
+                </ul>
             </div>
             <!--글 목록 끝-->
         </div>
+        <script>
+            $(function(){
+
+                $(".table-hover>tbody>tr").click(function(){
+                    var nno = $(this).children().eq(1).text();
+                    location.href='<%=contextPath%>/detail.no?nno='+nno;
+                })
+            })
+        </script>
 </body>
 </html>

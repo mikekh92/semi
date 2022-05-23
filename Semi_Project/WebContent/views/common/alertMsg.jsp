@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String errorMsg = (String)request.getAttribute("errorMsg");
-
+	String alertMsg = (String)request.getAttribute("alertMsg");
 %>    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 align="center" style="color:blue"><%=errorMsg%></h1>
+	<h1 align="center" style="color:blue"><%=alertMsg%></h1>
+
 </body>
 </html>

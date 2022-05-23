@@ -43,6 +43,8 @@
         <!--게시글 테이블 작업 시작-->
         <div id="content_2_1">
             <br> <h2 align="center">공지사항 작성하기</h2>
+<%--             	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>"> --%>
+					// 나중에 꼭 필요 hidden
                 <form id="enrollForm" action="<%=contextPath%>/insert.no" method="post">
              
                     <table align="center">

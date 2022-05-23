@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.notice.model.vo.Notice"%>
+<%
+	Notice notice = (Notice)request.getAttribute("notice");
+
+%>    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,27 +52,30 @@
             <table align="center" border="1">
                 <tr>
                     <th width="70px">제목</th>
-                    <td width="350px" colspan="3">공지사항 제목</td>                    
+                    <td width="350px" colspan="3"><%=notice.getNoticeTitle()%></td>                    
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>관리자</td>
+                    <td><%=notice.getNoticeWriter() %></td>
                     <th>작성일</th>
-                    <td>2022-05-14</td>
+                    <td><%=notice.getNoticeDate() %></td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td colspan="3">
-                        <p style="height: 200px;">안녕하세요 관리자입니다.</p>
+                        <p style="height: 200px;"><%=notice.getNoticeContent() %></p>
                     </td>
                 </tr>
             </table>
             <br><br>
         </div>
         <div id="content_2_3" align="center">
-            <a href="" class="btn btn-success">목록으로 가기</a>
-            <a href="" class="btn btn-warning">수정하기</a>
-            <a href="" class="btn btn-danger">삭제하기</a>
+            <a href="<%=contextPath%>/list.no" class="btn btn-success">목록으로 가기</a>
+<%--             <%if(loginUser!=null && loginUser.getUserId().equals(notice.getNoticeWriter())) %> --%>
+					//나중에 연결할때 필요한거
+            <a href="<%=contextPath%>/updateForm.no?nno=<%=notice.getNoticeNo()%>" class="btn btn-warning">수정하기</a>
+            <a href="<%=contextPath%>/delete.no?nno=<%=notice.getNoticeNo()%>" class="btn btn-danger">삭제하기</a>
+<%--             <%} %> --%>
         </div>
         <!--게시글 테이블 작업 끝-->
         <!--글 목록 시작-->
