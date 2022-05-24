@@ -7,6 +7,7 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.common.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 
@@ -27,11 +28,11 @@ public class NoticeService {
 		return result;
 	}
 
-	public ArrayList<Notice> selectNoticeList() {
+	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
 		
 		Connection conn =getConnection();
 		
-		ArrayList <Notice> list=new NoticeDao().selectNoticeList(conn);
+		ArrayList <Notice> list=new NoticeDao().selectNoticeList(conn,pi);
 		
 		close(conn);
 		return list;

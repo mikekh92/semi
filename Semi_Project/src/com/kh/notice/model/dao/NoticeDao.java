@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.PageInfo;
 import com.kh.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -51,7 +52,7 @@ public class NoticeDao {
 		return result;
 	}
 
-	public ArrayList<Notice> selectNoticeList(Connection conn) {
+	public ArrayList<Notice> selectNoticeList(Connection conn, PageInfo pi) {
 		
 		ArrayList<Notice> list = new ArrayList<>();
 		
@@ -63,6 +64,11 @@ public class NoticeDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+			int endRow =pi.getCurrentPage()*pi.getBoardLimit();
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			
 			rset=pstmt.executeQuery();
 			

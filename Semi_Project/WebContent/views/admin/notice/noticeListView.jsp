@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList,com.kh.notice.model.vo.Notice"%>
+    pageEncoding="UTF-8" import="com.kh.common.PageInfo,java.util.ArrayList,com.kh.notice.model.vo.Notice"%>
 <%
 	ArrayList <Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage= pi.getStartPage();
+	int endPage= pi.getEndPage();
+	int maxPage= pi.getMaxPage();
 
 %>    
 <!DOCTYPE html>
@@ -24,7 +30,7 @@
 	<link rel="stylesheet" href="/Semi/views/admin-css/admin_b_2.css">
 <style>
     #content_2_5{
-    height:50%;
+    height:70%;
     width:95%;
     background-color: rgb(216, 226, 229);
     margin: auto;
@@ -87,13 +93,15 @@
             <!--게시글 테이블 작업 시작-->
             <div id="content_2_5">
                 <br>
-                <div class="selecdiv col-sm-2">
-                        <select id="select" class="form-control">
-                            <option value="">5개</option>
-                            <option value="">10개</option>
-                            <option value="">20개</option>
+                
+                		<form action="<%=contextPath%>/list.no" method="post">
+                        <select id="select" class="form-control" name="selectNumber">
+                            <option value="5">5개</option>
+                            <option value="10" selected="selected">10개</option>
+                            <option value="20">20개</option>
                         </select>
-                </div>
+                        </form>
+                
                 <table align="center" class="table-hover" >
                     <thead>
                         <th width="4%">
@@ -128,25 +136,31 @@
             <!--게시글 테이블 작업 끝-->
             
             <!--글 목록 시작-->
+        <script>
+            $(function(){
+                $(".table-hover>tbody>tr").click(function(){ 
+                    location.href="<%=contextPath%>/detail.no?nno="+$(this).children().eq(1).text();
+                });
+            });
+        </script>
             <div id="content_2_6">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                	<%if(currentPage!=1){ %>
+                    <li class="page-item"><a class="page-link" href="<%=contextPath%>/list.no?cpage=<%=currentPage-1%>">&lt;</a></li>
+                    <%} %>
+                    <%for(int i=startPage; i<=endPage; i++){ %>
+                    	<%if(i!=currentPage){%>
+                    		<li class="page-item"><a class="page-link" href="<%=contextPath%>/list.no?cpage=<%=i%>"><%=i %></a></li>
+                    	<%}else{ %>	
+                    		<li class="page-item active"><a class="page-link" href=""><%=i %></a></li>
+                    	<%} %>
+                    <%} %>
+                    <%if(currentPage!=maxPage){ %>
+                    <li class="page-item"><a class="page-link" href="<%=contextPath%>/list.no?cpage=<%=currentPage+1%>">&gt;</a></li>
+                    <%} %>
                 </ul>
             </div>
             <!--글 목록 끝-->
         </div>
-        <script>
-            $(function(){
-
-                $(".table-hover>tbody>tr").click(function(){
-                    var nno = $(this).children().eq(1).text();
-                    location.href='<%=contextPath%>/detail.no?nno='+nno;
-                })
-            })
-        </script>
 </body>
 </html>

@@ -50,10 +50,10 @@
                         <td colspan="2" class="sub-menu"><a href="/Semi/views/admin/order/orderListView1_1.jsp">주문내역 관리</a></td>
                     </tr>
                     <tr class="SM">
-                        <td colspan="2" class="sub-menu"><a href="<%=contextPath%>/list.no">공지사항 관리</a></td>
+                        <td colspan="2" class="sub-menu"><a href="<%=contextPath%>/list.no?cpage=1">공지사항 관리</a></td>
                     </tr>
                     <tr class="SM">
-                        <td colspan="2" class="sub-menu"><a href="/Semi/views/admin/review/reviewListView.jsp">리뷰 관리</a></td>
+                        <td colspan="2" class="sub-menu"><a href="<%=contextPath%>/list.ro?cpage=1">리뷰 관리</a></td>
                     </tr>
 
                     <tr class="CM">

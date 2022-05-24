@@ -70,7 +70,7 @@
             <br><br>
         </div>
         <div id="content_2_3" align="center">
-            <a href="<%=contextPath%>/list.no" class="btn btn-success">목록으로 가기</a>
+            <a href="<%=contextPath%>/list.no?cpage=1" class="btn btn-success">목록으로 가기</a>
 <%--             <%if(loginUser!=null && loginUser.getUserId().equals(notice.getNoticeWriter())) %> --%>
 					//나중에 연결할때 필요한거
             <a href="<%=contextPath%>/updateForm.no?nno=<%=notice.getNoticeNo()%>" class="btn btn-warning">수정하기</a>
